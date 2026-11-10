@@ -1,6 +1,8 @@
 # SC4 Time Control
 
-A SimCity 4 DLL plugin for the time of day:
+A SimCity 4 DLL plugin for the time of day. A separate version, grown from
+[SC4 Time Of Day Menu](https://github.com/Spamoidutout/SC4TimeOfDayMenu).
+
 
 - **Clock**: the time is shown next to the date, in the bottom-left panel
   (in steps of 5 minutes, 10 at x8).
@@ -14,8 +16,10 @@ stopped by the `stopwatch` cheat, and only undoes its own pause.
 
 ## Install
 
-Copy `SC4TimeControl.dll`, `SC4TimeControl.dat` and `SC4TimeControl.ini` into
-the root of `Documents\SimCity 4\Plugins`. Requires SimCity 4 1.1.641 for
+Download `SC4TimeControl-1.0.zip` from the
+[Releases](https://github.com/Spamoidutout/SC4TimeControl/releases) page and copy
+`SC4TimeControl.dll`, `SC4TimeControl.dat` and `SC4TimeControl.ini` into the root
+of `Documents\SimCity 4\Plugins`. Requires SimCity 4 1.1.641 for
 Windows. Do not use it together with SC4 Time Of Day Menu (same button).
 
 ## Settings (`SC4TimeControl.ini`)
