@@ -1,0 +1,2 @@
+// Empty shim: cIGZFrameWork.h includes <list> but never uses it.
+#pragma once

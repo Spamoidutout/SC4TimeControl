@@ -1,0 +1,3 @@
+gzcom-dll (https://github.com/nsgomez/gzcom-dll), headers only.
+Commit: 539467fbfece3f8094c78efdbc01ee719b9a9369 (2026-11-10)
+shim/list: empty <list> (cIGZFrameWork.h includes it but never uses it).
