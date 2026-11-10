@@ -25,5 +25,6 @@ Third-party material, not covered by the MIT license above:
 
 - sdk/include: headers from gzcom-dll (https://github.com/nsgomez/gzcom-dll),
   LGPL 2.1, see sdk/gzcom-dll-LICENSE.txt.
-- assets/maxis_dialog_source.png and the images in SC4TimeOfDayMenu.dat are
-  taken from the SimCity 4 interface, (c) Electronic Arts / Maxis.
+- assets/maxis_dialog_source.png, assets/clock_field.png and the images in
+  SC4TimeControl.dat are taken from (or drawn after) the SimCity 4 interface,
+  (c) Electronic Arts / Maxis.

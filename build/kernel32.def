@@ -1,0 +1,7 @@
+; kernel32 import library (32-bit): the functions used for the INI file.
+LIBRARY kernel32.dll
+EXPORTS
+GetModuleFileNameA@12
+GetPrivateProfileStringA@24
+GetPrivateProfileIntA@16
+WritePrivateProfileStringA@16

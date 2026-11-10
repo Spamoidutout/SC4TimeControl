@@ -26,3 +26,6 @@ extern "C"
 	// Referenced by the vtables of abstract classes; never called.
 	int __cdecl _purecall() { return 0; }
 }
+
+// Tells the linker that floating point is used (no CRT to define it).
+extern "C" int _fltused = 0;
