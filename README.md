@@ -3,7 +3,6 @@
 A SimCity 4 DLL plugin for the time of day. A separate version, grown from
 [SC4 Time Of Day Menu](https://github.com/Spamoidutout/SC4TimeOfDayMenu).
 
-
 - **Clock**: the time is shown next to the date, in the bottom-left panel
   (in steps of 5 minutes, 10 at x8).
 - **Menu**: right-click the God Mode button. Pick an hour (00:00–23:00), or the
