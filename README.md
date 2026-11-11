@@ -4,6 +4,19 @@ A SimCity 4 DLL plugin for the time of day: the more advanced version of
 [SC4 Time Of Day Menu](https://github.com/Spamoidutout/SC4TimeOfDayMenu), with
 a clock, cycle speeds and settings.
 
+> [!IMPORTANT]
+> **Install only one of the two.** SC4 Time Control has a little brother,
+> [SC4 Time Of Day Menu](https://github.com/Spamoidutout/SC4TimeOfDayMenu).
+> Both use the right-click on the God Mode button, so they must **not** be
+> installed together.
+> - **SC4 Time Control** (this one) is the complete version: the clock next to
+>   the date, the hours, the cycle speeds and the settings.
+> - **SC4 Time Of Day Menu** is the lightweight version: just a menu to change
+>   the hour.
+>
+> If SC4 Time Of Day Menu is in your Plugins folder, delete
+> `SC4TimeOfDayMenu.dll` and `SC4TimeOfDayMenu.dat` before installing SC4 Time Control.
+
 - **Clock**: the time is shown next to the date, in the bottom-left panel
   (in steps of 5 minutes, 10 at x8).
 - **Menu**: right-click the God Mode button. Pick an hour (00:00–23:00), or the
@@ -13,16 +26,6 @@ a clock, cycle speeds and settings.
 Setting an hour issues the game's own cheat, exactly as Ctrl+X
 `whattimeizit <hour>` does. Pause only stops the clock if it is not already
 stopped by the `stopwatch` cheat, and only undoes its own pause.
-
-## SC4 Time Control or SC4 Time Of Day Menu?
-
-- **SC4 Time Of Day Menu** is the lightweight one: right-click, pick an hour,
-  done.
-- **SC4 Time Control** (this one) is the more advanced version: everything the
-  other one does, plus the clock next to the date, the cycle speeds and the
-  settings.
-
-Install one or the other, **not both**: they use the same button.
 
 ## Install
 
