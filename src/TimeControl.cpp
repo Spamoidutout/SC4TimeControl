@@ -196,7 +196,8 @@ namespace
 
 	// The city's 24-hour clock
 	cISC424HourClock* gCityClock = nullptr;     // the clock the default speed was applied to
-	cISC424HourClock* gPausedClock = nullptr;   // the clock WE paused (one Pause(true) to undo)
+	cISC424HourClock* gRepauseClock = nullptr;  // paused clock resumed for an hour change
+	int32_t gRepauseIdles = 0;                  // OnIdle calls since that change
 
 	constinit FixedString gText;        // captions
 	constinit FixedString gCheatLine;   // "whattimeizit 14", kept alive after the send
@@ -416,18 +417,39 @@ namespace
 		mgr->SendCheatNotifications(gCheatLine, gCheatID);
 	}
 
-	// Speed. Pause() is a counter that the stopwatch cheat uses too: the pause
-	// item only adds or removes OUR pause.
+	// Pause() is a counter (the stopwatch cheat uses it too) and it is saved
+	// with the city: resuming undoes every pause, whoever made it.
+	void Resume(cISC424HourClock* k)
+	{
+		for (int i = 0; i < 16 && k->IsPaused(); ++i) k->Pause(false);
+	}
+
+	// Speed: the pause item toggles the clock; a speed resumes it.
 	void SetSpeed(cISC424HourClock* k, int32_t index)
 	{
+		if (gRepauseClock == k) gRepauseClock = nullptr;
 		if (index == kPause)
 		{
-			if (gPausedClock == k) { k->Pause(false); gPausedClock = nullptr; }
-			else if (!k->IsPaused()) { k->Pause(true); gPausedClock = k; }
+			if (k->IsPaused()) Resume(k);
+			else k->Pause(true);
 			return;
 		}
-		if (gPausedClock == k) { k->Pause(false); gPausedClock = nullptr; }
+		Resume(k);
 		k->SetTimeMagnification(kSpeedValues[index]);
+	}
+
+	// An hour picked while the clock is paused: the lighting only follows the
+	// clock while it runs. Resume, change the hour, pause again once the visual
+	// time has caught up (see IdleWork).
+	void PickHour(cISC424HourClock* k, int32_t hour)
+	{
+		if (k->IsPaused())
+		{
+			Resume(k);
+			gRepauseClock = k;
+			gRepauseIdles = 0;
+		}
+		SetHour(hour);
 	}
 
 	// ======================================================================
@@ -527,7 +549,7 @@ namespace
 		{
 			CloseMenu();
 			CloseClock();
-			gCityClock = gPausedClock = nullptr;
+			gCityClock = gRepauseClock = nullptr;
 			gOpen = gClose = false;
 			return;
 		}
@@ -541,7 +563,7 @@ namespace
 				SetSpeed(k, item - kSpeedItem);
 				RememberSpeed(item - kSpeedItem);
 			}
-			else if (item >= 0) SetHour(item);
+			else if (item >= 0) PickHour(k, item);
 		}
 		else if (!gMenuWin && gOpen)
 		{
@@ -549,13 +571,21 @@ namespace
 		}
 		gOpen = gClose = false;
 
+		if (gRepauseClock == k && ++gRepauseIdles >= 5 &&
+		    (k->GetVisualHour() == k->GetHour() || gRepauseIdles >= 300))
+		{
+			k->Pause(true);
+			gRepauseClock = nullptr;
+		}
+
 		UpdateClock(k);
 
-		// A newly loaded city: once its interface is up, apply the default speed.
+		// A newly loaded city: once its interface is up, apply the default speed
+		// (this also resumes a clock saved paused).
 		if (k != gCityClock && gClockWin)
 		{
 			gCityClock = k;
-			gPausedClock = nullptr;
+			gRepauseClock = nullptr;
 			SetSpeed(k, gDefaultSpeed);
 		}
 	}

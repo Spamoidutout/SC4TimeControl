@@ -24,8 +24,9 @@ a clock, cycle speeds and settings.
   x4, x8. The current speed is shown in red.
 
 Setting an hour issues the game's own cheat, exactly as Ctrl+X
-`whattimeizit <hour>` does. Pause only stops the clock if it is not already
-stopped by the `stopwatch` cheat, and only undoes its own pause.
+`whattimeizit <hour>` does; while the clock is paused, it stays paused at the
+new hour. Pause stops or resumes the clock, whatever stopped it (the
+`stopwatch` cheat too). A city always starts running, at the default speed.
 
 ## Install
 
@@ -50,7 +51,11 @@ Windows.
 - Hours: `DoesCheatCodeMatch("whattimeizit")`, then
   `SendCheatNotifications("whattimeizit <hour>", id)`.
 - Speeds: `cISC4City::Get24HourClock()`, then `SetTimeMagnification` (normal
-  135, so 1/2 = 67.5 … x8 = 1080) and `Pause(true/false)` (a counter).
+  135, so 1/2 = 67.5 … x8 = 1080) and `Pause(true/false)` (a counter, saved
+  with the city: resuming calls `Pause(false)` until `IsPaused()` is false).
+- An hour picked while paused: resume, issue the cheat, pause again once
+  `GetVisualHour()` has caught up with `GetHour()` (the lighting only follows
+  a running clock).
 - Clock: our own window, child of the game's panel `0x0987B48F` at (149,128):
   `clock_field.png` (the date field's right end, widened) and a text that gets
   the font style of the game's date text (`GetFontStyle` / `SetFontStyle`).
