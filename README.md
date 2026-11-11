@@ -30,7 +30,7 @@ new hour. Pause stops or resumes the clock, whatever stopped it (the
 
 ## Install
 
-Download `SC4TimeControl-1.0.zip` from the
+Download `SC4TimeControl-1.0.1.zip` from the
 [Releases](https://github.com/Spamoidutout/SC4TimeControl/releases) page and copy
 `SC4TimeControl.dll`, `SC4TimeControl.dat` and `SC4TimeControl.ini` into the root
 of `Documents\SimCity 4\Plugins`. Requires SimCity 4 1.1.641 for
@@ -90,6 +90,14 @@ The `.dat` ids are in both `tools/build_dat.py` and `src/TimeControl.cpp`.
 | `assets/maxis_dialog_source.png` | Game dialog the menu's frame and panel are cut from |
 | `assets/clock_field.png` | The widened end of the date field |
 | `build/` | `build.sh`, `kernel32.def` |
+
+## Version history
+
+- **1.0.1**: a city saved with the clock paused could not be resumed. Pause now
+  stops or resumes the clock whatever stopped it, a city always starts running
+  at the default speed, and an hour picked while paused stays paused at that
+  hour.
+- **1.0**: first release.
 
 ## License
 
